@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashish Singh - Space Engineering Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --bg-card: rgba(30, 41, 59, 0.5);
+            --border: rgba(148, 163, 184, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                radial-gradient(2px 2px at 40px 70px, #eee, transparent),
+                radial-gradient(1px 1px at 50px 50px, #eee, transparent),
+                radial-gradient(1px 1px at 80px 10px, #eee, transparent),
+                radial-gradient(2px 2px at 130px 80px, #eee, transparent);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            opacity: 0.3;
+            animation: float 100s linear infinite;
+        }
+
+        @keyframes float {
+            from { transform: translateX(0) translateY(0); }
+            to { transform: translateX(-200px) translateY(-200px); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-light);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-light);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.5rem;
+            color: var(--accent-light);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-text p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(59, 130, 246, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-light);
+            border: 2px solid var(--accent-light);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-light);
+            color: var(--primary);
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .orbit-container {
+            width: 400px;
+            height: 400px;
+            position: relative;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .orbit {
+            position: absolute;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .orbit:nth-child(1) { width: 100%; height: 100%; }
+        .orbit:nth-child(2) { width: 75%; height: 75%; animation-duration: 15s; }
+        .orbit:nth-child(3) { width: 50%; height: 50%; animation-duration: 10s; }
+
+        .satellite {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-light);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--accent-light);
+        }
+
+        .satellite:nth-child(4) { top: 0; left: 50%; transform: translateX(-50%); }
+        .satellite:nth-child(5) { top: 25%; right: 15%; }
+        .satellite:nth-child(6) { bottom: 20%; left: 10%; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section styles */
+        section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-light), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .skill-card h3 {
+            color: var(--accent-light);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--text-secondary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover {
+            background: rgba(59, 130, 246, 0.4);
+            color: var(--text-primary);
+            transform: scale(1.05);
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, transparent, var(--accent), transparent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 50%;
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 3rem;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 3rem;
+        }
+
+        .timeline-content {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            top: 2rem;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -10px;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(59, 130, 246, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4);
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            padding: 1rem;
+            position: relative;
+        }
+
+        .project-header h3 {
+            font-size: 1.3rem;
+            color: white;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-badge {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent-light);
+            padding: 0.2rem 0.6rem;
+            border-radius: 0.3rem;
+            font-size: 0.85rem;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .contact-link:hover {
+            color: var(--accent-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .orbit-container {
+                width: 250px;
+                height: 250px;
+            }
+
+            .timeline::before {
+                left: 2rem;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 4rem !important;
+                padding-right: 0 !important;
+                text-align: left !important;
+            }
+
+            .timeline-dot {
+                left: 1.25rem !important;
+                right: auto !important;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">AS</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Ashish Singh</h1>
+                    <p class="subtitle">Space Engineering · Robotics · Systems Design</p>
+                    <p>MSc Space Engineering student at TU Berlin with expertise in spacecraft systems, CFD/FSI simulation, and remote sensing. Passionate about developing next-generation space and robotic systems through interdisciplinary collaboration and innovative problem-solving.</p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                        <a href="https://www.linkedin.com/in/ashish-singh-a22212180" target="_blank" class="btn btn-secondary">LinkedIn Profile</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="orbit-container">
+                        <div class="orbit"></div>
+                        <div class="orbit"></div>
+                        <div class="orbit"></div>
+                        <div class="satellite"></div>
+                        <div class="satellite"></div>
+                        <div class="satellite"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>🚀 Space Systems</h3>
+                    <div class="skill-items">
+                        <span class="skill-tag">Spacecraft Design</span>
+                        <span class="skill-tag">Satellite Constellations</span>
+                        <span class="skill-tag">Remote Sensing</span>
+                        <span class="skill-tag">Mission Architecture</span>
+                        <span class="skill-tag">Lunar ISRU</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3>💻 Programming</h3>
+                    <div class="skill-items">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">MATLAB</span>
+                        <span class="skill-tag">Simulink</span>
+                        <span class="skill-tag">Linux/UNIX</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">ROS</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3>🔧 Simulation & CAD</h3>
+                    <div class="skill-items">
+                        <span class="skill-tag">ANSYS</span>
+                        <span class="skill-tag">CFD/FSI</span>
+                        <span class="skill-tag">SolidWorks</span>
+                        <span class="skill-tag">Fusion 360</span>
+                        <span class="skill-tag">FEA</span>
+                        <span class="skill-tag">ICEM CFD</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <h3>🤖 Robotics & Control</h3>
+                    <div class="skill-items">
+                        <span class="skill-tag">Robotic Arm Control</span>
+                        <span class="skill-tag">Arduino/ESP32</span>
+                        <span class="skill-tag">System Integration</span>
+                        <span class="skill-tag">Sensor Calibration</span>
+                        <span class="skill-tag">Image Processing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Professional Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>CAE Engineer</h3>
+                        <h4>Zeus Numerix Pvt Ltd</h4>
+                        <p>Jun 2023 - Feb 2024</p>
+                        <p>Executed complex CFD/FSI simulations for aerospace projects. Developed automation scripts reducing cycle time by 40%.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Graduate Engineer Trainee</h3>
+                        <h4>Zeus Numerix Pvt Ltd</h4>
+                        <p>Mar 2022 - Jun 2023</p>
+                        <p>Optimized CFD workflows improving modeling speed by 30%. Automated meshing pipelines for enhanced efficiency.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Engineering Trainee</h3>
+                        <h4>Aeronica Advance Technologies</h4>
+                        <p>Sep 2021 - Feb 2022</p>
+                        <p>Assisted in aerospace component validation focusing on fluid dynamics and structural stability.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Research Intern</h3>
+                        <h4>ARDE-DRDO</h4>
+                        <p>May 2021 - Aug 2021</p>
+                        <p>Conducted research on high velocity rotating launcher as replacement for pyrotechnic launchers.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>🛰️ PULSE PocketQube Mission</h3>
+                    </div>
+                    <div class="project-content">
+                        <p>Co-authored mission description for space weather monitoring. Conducted trade-off analysis for 450 km polar orbit, balancing atmospheric drag and radiation exposure.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Systems Engineering</span>
+                            <span class="tech-badge">Mission Design</span>
+                            <span class="tech-badge">Orbit Analysis</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>🤖 European Rover Challenge 2025</h3>
+                    </div>
+                    <div class="project-content">
+                        <p>Led Astro-Bio science task, integrating pH sensor and thermal camera. Served as primary robotic arm operator in live competition.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Robotics</span>
+                            <span class="tech-badge">System Integration</span>
+                            <span class="tech-badge">Sensor Calibration</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>🔥 Wildfire Detection System</h3>
+                    </div>
+                    <div class="project-content">
+                        <p>Developed EO-based toolchain using Sentinel-2, MODIS & VIIRS for fire detection. Built automated pipeline for burn scar detection and severity analysis.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Remote Sensing</span>
+                            <span class="tech-badge">Image Processing</span>
+                            <span class="tech-badge">QGIS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>🌙 Lunar ISRU Habitat Design</h3>
+                    </div>
+                    <div class="project-content">
+                        <p>Designed 30-day crew habitat with molten regolith electrolysis and life support systems. Performed trade-off analysis for power and habitation systems.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Systems Design</span>
+                            <span class="tech-badge">Life Support</span>
+                            <span class="tech-badge">ISRU</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>📡 Satellite Constellation Strategy</h3>
+                    </div>
+                    <div class="project-content">
+                        <p>Designed scalable CubeSat constellation architecture. Modeled automated deployment pipelines and analyzed constellation lifetime using reliability models.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Constellation Design</span>
+                            <span class="tech-badge">System Architecture</span>
+                            <span class="tech-badge">Reliability Analysis</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>✈️ Fixed Wing VTOL UAV</h3>
+                    </div>
+                    <div class="project-content">
+                        <p>Designed and fabricated VTOL UAV using Depron sheet. Performed thrust calculations for VTOL and forward thrust motors.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">UAV Design</span>
+                            <span class="tech-badge">Aerodynamics</span>
+                            <span class="tech-badge">Fabrication</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="contact-container">
+                <h2 class="section-title">Let's Connect</h2>
+                <p>I'm always interested in discussing space engineering, robotics, and innovative technology projects.</p>
+                <div class="contact-links">
+                    <a href="mailto:ashish.krishna.murari.singh@campus.tu-berlin.de" class="contact-link">
+                        ✉️ Email
+                    </a>
+                    <a href="https://www.linkedin.com/in/ashish-singh-a22212180" target="_blank" class="contact-link">
+                        💼 LinkedIn
+                    </a>
+                    <a href="tel:+4915510280857" class="contact-link">
+                        📱 Phone
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Ashish Singh. MSc Space Engineering at TU Berlin.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
