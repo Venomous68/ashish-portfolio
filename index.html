@@ -340,6 +340,68 @@
             color: var(--text-primary);
             transform: scale(1.05);
         }
+        
+                /* Project Media Styles */
+        .project-media {
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .media-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .main-image:hover {
+            transform: scale(1.02);
+        }
+
+        .thumbnail-row {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+        }
+
+        .thumbnail, .thumbnail-video {
+            width: calc(33.33% - 7px);
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            opacity: 0.8;
+        }
+
+        .thumbnail:hover, .thumbnail-video:hover {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+
+        .thumbnail-video {
+            background: rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .thumbnail-row {
+                flex-direction: column;
+            }
+            
+            .thumbnail, .thumbnail-video {
+                width: 100%;
+                height: 120px;
+            }
+        }
 
         /* Experience Section */
         .timeline {
