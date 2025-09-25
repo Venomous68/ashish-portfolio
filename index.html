@@ -340,6 +340,68 @@
             color: var(--text-primary);
             transform: scale(1.05);
         }
+        
+                /* Project Media Styles */
+        .project-media {
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .media-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .main-image:hover {
+            transform: scale(1.02);
+        }
+
+        .thumbnail-row {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+        }
+
+        .thumbnail, .thumbnail-video {
+            width: calc(33.33% - 7px);
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            opacity: 0.8;
+        }
+
+        .thumbnail:hover, .thumbnail-video:hover {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+
+        .thumbnail-video {
+            background: rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .thumbnail-row {
+                flex-direction: column;
+            }
+            
+            .thumbnail, .thumbnail-video {
+                width: 100%;
+                height: 120px;
+            }
+        }
 
         /* Experience Section */
         .timeline {
@@ -718,6 +780,15 @@
                     <div class="project-header">
                         <h3>🛰️ PULSE PocketQube Mission</h3>
                     </div>
+                    <div class="project-media">
+                        <div class="media-gallery">
+                            <img src="images/spenvis-450km-electron-flux.png" alt="PULSE mission electron flux analysis" class="project-image main-image">
+                            <div class="thumbnail-row">
+                                <img src="images/spenvis-450km-proton-flux.png" alt="Proton flux analysis" class="thumbnail">
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="project-content">
                         <p>Co-authored mission description for space weather monitoring. Conducted trade-off analysis for 450 km polar orbit, balancing atmospheric drag and radiation exposure.</p>
                         <div class="project-tech">
@@ -731,6 +802,16 @@
                     <div class="project-header">
                         <h3>🤖 European Rover Challenge 2025</h3>
                     </div>
+                    <div class="project-media">
+                        <div class="media-gallery">
+                            <img src="images/DSC03769.jpg" alt="Rover in competition field" class="project-image main-image">
+                            <div class="thumbnail-row">
+                                <img src="images/DSC03957.jpg" alt="Group Rover in competition field" class="project-image main-image">
+                            <video src="videos/pH_Sensor.mp4" class="thumbnail-video" controls muted preload="metadata"></video>
+                            <video src="videos/thermal_camera.mp4" class="thumbnail-video" controls muted preload="metadata"></video>
+                        </div>
+                    </div>
+                </div>
                     <div class="project-content">
                         <p>Led Astro-Bio science task, integrating pH sensor and thermal camera. Served as primary robotic arm operator in live competition.</p>
                         <div class="project-tech">
@@ -744,6 +825,13 @@
                     <div class="project-header">
                         <h3>🔥 Wildfire Detection System</h3>
                     </div>
+                    <div class="project-media">
+                        <div class="media-gallery">
+                            <img src="images/firms.png" alt="FIRMS data with TUBIN data" class="project-image main-image">
+                            <div class="thumbnail-row">
+                            </div>
+                        </div>
+                    </div>
                     <div class="project-content">
                         <p>Developed EO-based toolchain using Sentinel-2, MODIS & VIIRS for fire detection. Built automated pipeline for burn scar detection and severity analysis.</p>
                         <div class="project-tech">
@@ -756,6 +844,13 @@
                 <div class="project-card">
                     <div class="project-header">
                         <h3>🌙 Lunar ISRU Habitat Design</h3>
+                    </div>
+                    <div class="project-media">
+                        <div class="media-gallery">
+                            <img src="images/isru.png" alt="Moonbase concept" class="project-image main-image">
+                            <div class="thumbnail-row">
+                            </div>
+                        </div>
                     </div>
                     <div class="project-content">
                         <p>Designed 30-day crew habitat with molten regolith electrolysis and life support systems. Performed trade-off analysis for power and habitation systems.</p>
@@ -782,6 +877,15 @@
                 <div class="project-card">
                     <div class="project-header">
                         <h3>✈️ Fixed Wing VTOL UAV</h3>
+                    </div>
+                    <div class="project-media">
+                        <div class="media-gallery">
+                            <img src="images/wing.png" alt="wing manufacturing" class="project-image main-image">
+                            <div class="thumbnail-row">
+                                <img src="images/cf.png" alt="carbon fibre on wing" class="thumbnail">
+                                <video src="videos/Uav.mp4" class="thumbnail-video" controls muted preload="metadata"></video>
+                            </div>
+                        </div>
                     </div>
                     <div class="project-content">
                         <p>Designed and fabricated VTOL UAV using Depron sheet. Performed thrust calculations for VTOL and forward thrust motors.</p>
