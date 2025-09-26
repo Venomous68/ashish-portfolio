@@ -356,8 +356,9 @@
 
         .main-image {
             width: 100%;
-            height: 250px;
-            object-fit: cover;
+            height: 300px;
+            object-fit: contain;
+            background-color: rgba(0,0,0,0.1);
             border-radius: 6px;
             cursor: pointer;
             transition: transform 0.3s ease;
@@ -375,21 +376,96 @@
 
         .thumbnail, .thumbnail-video {
             width: calc(33.33% - 7px);
-            height: 80px;
-            object-fit: cover;
+            height: 250px;
+            object-fit: contain;
             border-radius: 4px;
             cursor: pointer;
             transition: transform 0.2s ease, opacity 0.2s ease;
             opacity: 0.8;
+            border: 2px solid transparent;
         }
 
         .thumbnail:hover, .thumbnail-video:hover {
             transform: scale(1.05);
             opacity: 1;
+            border-color: var(--accent);
         }
 
         .thumbnail-video {
-            background: rgba(0,0,0,0.1);
+            background: rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        /* Play button overlay for video thumbnails */
+        .thumbnail-video::before {
+        content: '▶';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 24px;
+        text-shadow: 0 0 4px rgba(0,0,0,0.7);
+        pointer-events: none;
+        }
+
+        /* Modal/Lightbox Styles */
+        .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 90vw;
+        max-height: 90vh;
+        border-radius: 8px;
+        overflow: hidden;
+        }
+
+        .modal img, .modal video {
+        width: 100%;
+        height: auto;
+        max-height: 90vh;
+        object-fit: contain;
+        }
+
+        .modal-close {
+        position: absolute;
+        top: 15px;
+        right: 25px;
+        color: white;
+        font-size: 35px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 1001;
+        background: rgba(0,0,0,0.5);
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.3s ease;
+        }
+
+        .modal-close:hover {
+        background: rgba(255,255,255,0.2);
+        }
+
+        @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
         }
 
         @media (max-width: 768px) {
@@ -400,6 +476,11 @@
             .thumbnail, .thumbnail-video {
                 width: 100%;
                 height: 120px;
+            }
+
+            .modal-content {
+            max-width: 95vw;
+            max-height: 95vh;
             }
         }
 
@@ -782,9 +863,9 @@
                     </div>
                     <div class="project-media">
                         <div class="media-gallery">
-                            <img src="images/spenvis 450km electron flux.png" alt="PULSE mission electron flux analysis" class="project-image main-image">
+                            <img src="images/spenvis 450km electron flux.png" alt="PULSE mission electron flux analysis" class="project-image main-image" onclick="openModal('images/spenvis 450km electron flux.png', 'image')">
                             <div class="thumbnail-row">
-                                <img src="images/spenvis 450km proton flux.png" alt="Proton flux analysis" class="thumbnail">
+                                <img src="images/spenvis 450km proton flux.png" alt="Proton flux analysis" class="thumbnail" onclick="openModal('images/spenvis 450km proton flux.png', 'image')">
                             </div>
                         </div>
                     </div>
@@ -804,14 +885,14 @@
                     </div>
                     <div class="project-media">
                         <div class="media-gallery">
-                            <img src="images/DSC03769.JPG" alt="Rover in competition field" class="project-image main-image">
+                            <img src="images/DSC03769.JPG" alt="Rover in competition field" class="project-image main-image" onclick="openModal('images/DSC03769.JPG', 'image')">
                             <div class="thumbnail-row">
-                                <img src="images/DSC03957.JPG" alt="Group Rover in competition field" class="project-image main-image">
-                            <video src="videos/pH_Sensor.mp4" class="thumbnail-video" controls muted preload="metadata"></video>
-                            <video src="videos/thermal_camera.mp4" class="thumbnail-video" controls muted preload="metadata"></video>
+                                <img src="images/DSC03957.JPG" alt="Group Rover in competition field" class="thumbnail" onclick="openModal('images/DSC03957.JPG', 'image')">
+                                <video src="videos/pH_Sensor.mp4" class="thumbnail-video" muted preload="metadata" onclick="openModal('videos/pH_Sensor.mp4', 'video')"></video>
+                                <video src="videos/thermal_camera.mp4" class="thumbnail-video" muted preload="metadata" onclick="openModal('videos/thermal_camera.mp4', 'video')"></video>
+                            </div>
                         </div>
                     </div>
-                </div>
                     <div class="project-content">
                         <p>Led Astro-Bio science task, integrating pH sensor and thermal camera. Served as primary robotic arm operator in live competition.</p>
                         <div class="project-tech">
@@ -827,7 +908,7 @@
                     </div>
                     <div class="project-media">
                         <div class="media-gallery">
-                            <img src="images/firms.png" alt="FIRMS data with TUBIN data" class="project-image main-image">
+                            <img src="images/firms.png" alt="FIRMS data with TUBIN data" class="project-image main-image" onclick="openModal('images/firms.png', 'image')">
                             <div class="thumbnail-row">
                             </div>
                         </div>
@@ -847,7 +928,7 @@
                     </div>
                     <div class="project-media">
                         <div class="media-gallery">
-                            <img src="images/isru.png" alt="Moonbase concept" class="project-image main-image">
+                            <img src="images/isru.png" alt="Moonbase concept" class="project-image main-image" onclick="openModal('images/isru.png', 'image')">
                             <div class="thumbnail-row">
                             </div>
                         </div>
@@ -880,10 +961,10 @@
                     </div>
                     <div class="project-media">
                         <div class="media-gallery">
-                            <img src="images/wing.png" alt="wing manufacturing" class="project-image main-image">
+                            <img src="images/wing.png" alt="wing manufacturing" class="project-image main-image" onclick="openModal('images/wing.png', 'image')">
                             <div class="thumbnail-row">
-                                <img src="images/cf.png" alt="carbon fibre on wing" class="thumbnail">
-                                <video src="videos/Uav.mp4" class="thumbnail-video" controls muted preload="metadata"></video>
+                                <img src="images/cf.png" alt="carbon fibre on wing" class="thumbnail" onclick="openModal('images/cf.png', 'image')">
+                                <video src="videos/Uav.mp4" class="thumbnail-video" muted preload="metadata" onclick="openModal('videos/Uav.mp4', 'video')"></video>
                             </div>
                         </div>
                     </div>
@@ -927,5 +1008,88 @@
     </footer>
 
     <script>
-        // Smooth scrolling
+        // Smooth scrolling (your existing code)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // ADD THE NEW MODAL JAVASCRIPT HERE
+        // Modal functionality
+        let currentModal = null;
+
+        function openModal(src, type) {
+            // Create modal if it doesn't exist
+            if (!document.getElementById('mediaModal')) {
+                const modal = document.createElement('div');
+                modal.id = 'mediaModal';
+                modal.className = 'modal';
+                modal.innerHTML = `
+                    <span class="modal-close">&times;</span>
+                    <div class="modal-content">
+                        <div id="modalMedia"></div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+                
+                // Close modal when clicking close button or background
+                modal.querySelector('.modal-close').onclick = closeModal;
+                modal.onclick = function(e) {
+                    if (e.target === modal) closeModal();
+                };
+                
+                // Close with Escape key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && currentModal) closeModal();
+                });
+            }
+            
+            const modal = document.getElementById('mediaModal');
+            const mediaContainer = document.getElementById('modalMedia');
+            
+            // Clear previous content
+            mediaContainer.innerHTML = '';
+            
+            // Add appropriate media element
+            if (type === 'video') {
+                const video = document.createElement('video');
+                video.src = src;
+                video.controls = true;
+                video.autoplay = true;
+                video.muted = true; // Start muted to allow autoplay
+                mediaContainer.appendChild(video);
+            } else {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = 'Full size image';
+                mediaContainer.appendChild(img);
+            }
+            
+            // Show modal
+            modal.style.display = 'block';
+            currentModal = modal;
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal() {
+            if (currentModal) {
+                currentModal.style.display = 'none';
+                document.body.style.overflow = ''; // Restore scrolling
+                
+                // Stop any playing videos
+                const videos = currentModal.querySelectorAll('video');
+                videos.forEach(video => {
+                    video.pause();
+                    video.currentTime = 0;
+                });
+                
+                currentModal = null;
+            }
+        }
+    </script>
+</body>
+</html>
